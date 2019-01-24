@@ -50,8 +50,23 @@
 			// convert text to JSON
 			var earthquakejson = JSON.parse(earthquakedata);
 			
-			// add JSON layer onto map - will appear using default icons
-			earthquakelayer = L.geoJSON(earthquakejson).addTo(mymap);
+			// load geoJSON earthquake layer using custom markers
+			earthquakelayer = L.geoJSON(earthquakejson,
+			{
+				// use point to layer to create the points
+				pointToLayer: function(feature, latlng){
+					// look at properties of GeoJSON file to see EQ magnitude and use different marker depending on magnitude
+					if (feature.properties.mag > 1.75){
+						return L.marker(latlng, {icon: testMarkerRed}).bindPopup("<b>"+
+						feature.properties.place+"</b>");
+					}
+					
+					else { 
+					return L.marker(latlng, {icon: testMarkerPink}).bindPopup("<b>"+
+						feature.properties.place+"</b>");
+					}
+				},					
+			}).addTo(mymap);
 			
 			// change the map zoom so that all the data is shown
 			mymap.fitBounds(earthquakelayer.getBounds());
@@ -79,6 +94,18 @@
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'mapbox.streets'
 			}).addTo(mymap);
+			
+			// create red test marker
+			var testMarkerRed = L.AwesomeMarkers.icon({
+				icon: 'play',
+				markerColor: 'red'
+			});
+			
+			// create pink test marker
+			var testMarkerPink = L.AwesomeMarkers.icon({
+				icon: 'play',
+				markerColor: 'pink'
+			});
 			
 			// add code that will load the map data AFTER the page has loaded
 			document.addEventListener('DOMContentLoaded', function(){
