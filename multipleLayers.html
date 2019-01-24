@@ -63,6 +63,14 @@
 			
 		</script>
 		
+		<!-- code that will run when the removeEarthquakeData button is clicked-->
+		<script>
+			function removeEarthquakeData(){
+				alert("remove the earthquake data here");
+			}
+		
+		</script>
+		
 </head>
 
 
@@ -71,10 +79,14 @@
 		<!--the mapid div will hold the map-->
 		<div id="mapid" style="width: 600px; height: 400px;"></div>
 		
-		
 		<!-- add button called Click here to load the data to webpage -->
 		<button id="loadData" name="loadData" onclick="loadEarthquakeData()">
 			Click here to load the data 
+		</button>
+		
+		<!-- add button called Click here to remove EQ data to webpage-->
+		<button id="removeEarthquakeData" name="removeEarthquakeData" onclick="removeEarthquakeData()">
+			Click here to remove the Earthquake data
 		</button>
 		
 		<!--the following script will load the map and set the default 
