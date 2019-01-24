@@ -73,6 +73,20 @@
 		
 		</script>
 		
+		<!-- code that will run when the loadBusstopData button is clicked -->
+		<script>
+			function loadBusstopData(){
+				alert("Loading bus stop data");
+			}
+		</script>
+			
+		<!-- code that will run when the removeBusstopData button is clicked -->
+		<script>
+			function removeBusstopData(){
+				alert("Removing bus stop data");
+			}
+		</script>
+		
 </head>
 
 
@@ -82,13 +96,23 @@
 		<div id="mapid" style="width: 600px; height: 400px;"></div>
 		
 		<!-- add button called Click here to load the data to webpage -->
-		<button id="loadData" name="loadData" onclick="loadEarthquakeData()">
-			Click here to load the data 
+		<button id="loadEarthquakeData" name="loadEarthquakeData" onclick="loadEarthquakeData()">
+			Click here to load the earthquake data 
 		</button>
 		
 		<!-- add button called Click here to remove EQ data to webpage-->
 		<button id="removeEarthquakeData" name="removeEarthquakeData" onclick="removeEarthquakeData()">
-			Click here to remove the Earthquake data
+			Click here to remove the earthquake data
+		</button>
+		
+		<!-- add button called Click to load bus stops data to webpage -->
+		<button id="loadBusstopData" name="loadBusstopData" onclick="loadBusstopData()">
+			Click here to load the bus stops data
+		</button>
+		
+		<!-- add button called Click to remove bus stops data to webpage -->
+		<button id="removeBusstopData" name="removeBusstopData" onclick="removeBusstopData()">
+			Click here to remove the bus stops data
 		</button>
 		
 		<!--the following script will load the map and set the default 
