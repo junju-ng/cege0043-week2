@@ -56,6 +56,7 @@
 				
 				// add JSON layer onto map (using default icons)
 				earthquakelayer = L.geoJSON(earthquakejson).addTo(mymap);
+				// Note: earthquake layer here is a global variable as it has not been initialised in the function
 				
 				// change map zoom so that all data is shown
 				mymap.fitBounds(earthquakelayer.getBounds());
@@ -66,7 +67,8 @@
 		<!-- code that will run when the removeEarthquakeData button is clicked-->
 		<script>
 			function removeEarthquakeData(){
-				alert("remove the earthquake data here");
+				alert("Earthquake data will be removed");
+				mymap.removeLayer(earthquakelayer);
 			}
 		
 		</script>
