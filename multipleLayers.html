@@ -22,11 +22,51 @@
 		<!-- code that will run when the loadData button is clicked-->
 		<script>
 			function loadEarthquakeData(){
-				alert("load the data here");
+				// call the getEarthquakes code
+				// keep the alert message so we know something is happening
+				alert("Loading Earthquakes");
+				getEarthquakes();
 			}
+			
+			// create a variable that will hold the XMLHttpRequest() - this must be done outside a function so that all functions can use the same variable
+			var client;
+		
+			// create the code to get the Earthquakes data using an XMLHttpRequest
+			function getEarthquakes(){
+				client = new XMLHttpRequest();
+				client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+				client.onreadystatechange = earthquakeResponse;
+				client.send();
+			}
+		
+			// create the code to wait for the response from the data server, and process the response once it is received
+			function earthquakeResponse(){
+				// this function listens out for the server to say that the data is ready (i.e. has state 4)
+				if (client.readyState == 4) {
+					//once daata is ready, process the data
+					var earthquakedata = client.responseText;
+					loadEarthquakelayer(earthquakedata);
+				}
+			}
+			
+			// convert the received earthquakedata (text) to JSON format and add to map
+			function loadEarthquakelayer(earthquakedata){
+				// convert text to JSON
+				var earthquakejson = JSON.parse(earthquakedata);
+				
+				// add JSON layer onto map (using default icons)
+				earthquakelayer = L.geoJSON(earthquakejson).addTo(mymap);
+				
+				// change map zoom so that all data is shown
+				mymap.fitBounds(earthquakelayer.getBounds());
+			}
+			
 		</script>
 		
 </head>
+
+
+
 <body>
 		<!--the mapid div will hold the map-->
 		<div id="mapid" style="width: 600px; height: 400px;"></div>
